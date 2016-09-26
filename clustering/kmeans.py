@@ -1,8 +1,15 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Sep 26 12:28:22 2016
+
+@author: ERLING
+"""
+
 import numpy as np
 
 def kmeans(k, x):
     """
-    kmeans(k, x) performs a k-means clustering of the dataset z using k randomly selected means
+    kmeans(k, x) performs a k-means clustering of the dataset x using k randomly selected means and Euclidean metric
     
     Inputs:
         - k: Number of desired clusters
