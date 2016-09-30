@@ -9,8 +9,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import complete_linkage as cl
 
-x = np.array([[1,1],[2,2],[3,3]])
+x = np.array([[1,1],[1,2],[2,1],[3,5],[4,4]])
 
-#plt.scatter(x[:,0], x[:,1])
+plt.scatter(x[:,0], x[:,1])
 
-cl.complete_linkage(x)
+(z, L) = cl.complete_linkage(x)
