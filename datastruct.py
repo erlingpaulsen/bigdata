@@ -25,11 +25,12 @@ class Variable:
         self.values = col.values[~np.isnan(col.values)]
         self.timestamps = col.index[~np.isnan(col.values)]
  
-        (tagno, name, system) = getVarNames(col)
+        (tagno, name, system, unit) = getVarNames(col)
         (f25, f50, f75, fmean) = getFrequencies(self.timestamps)
         self.tagno = str(tagno)        
         self.name = str(name)
         self.system = str(system)
+        self.unit = str(unit)
         self.frequencies = np.array([f25, f50, f75, fmean])
     
 
@@ -57,12 +58,14 @@ def getVarNames(col):
         tag = np.nan
     tagno = tag
     name = tag
+    unit = '-'
     try:
         name = sl.loc[tag, 'RDS Name']
         system = sl.loc[tag, 'RDS Location']
+        unit = sl.loc[tag, 'Unit']
     except KeyError:
         system = 'N/A'
-    return (tagno, name, system)
+    return (tagno, name, system, unit)
 
 
 def getFrequencies(timestamps):
