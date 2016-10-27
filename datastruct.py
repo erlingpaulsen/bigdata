@@ -14,7 +14,7 @@ import pickle
 
 
 tag_map = {'Start':'.01', 'Stop':'.02', 'OutRunning':'.03', 'Meas1':'', 'B4':'', 'Out':'', 'ProMeas':'', 'OutMeas':'', 'OutPosition':'.01'}
-sl = fh.loadDataH5('../data/', 'signal_list.h5') 
+sl = fh.loadDataH5('data/', 'signal_list.h5') 
 
 class Variable:
     """
@@ -23,13 +23,14 @@ class Variable:
     
     def __init__(self, col):
         self.values = col.values[~np.isnan(col.values)]
-        self.timestamps = pltd.date2num(col.index[~np.isnan(col.values)].values)
+        self.timestamps = col.index[~np.isnan(col.values)]
  
         (tagno, name, system) = getVarNames(col)
+        (f25, f50, f75, fmean) = getFrequencies(self.timestamps)
         self.tagno = str(tagno)        
         self.name = str(name)
         self.system = str(system)
-        self.frequencies = getFrequencies(self.values, self.timestamps)
+        self.frequencies = np.array([f25, f50, f75, fmean])
     
 
 class Data:
@@ -64,8 +65,14 @@ def getVarNames(col):
     return (tagno, name, system)
 
 
-def getFrequencies(values, timestamps):
-    return 0
+def getFrequencies(timestamps):
+    n = len(timestamps)
+    if n < 2:
+        return (0,0,0,0)
+    else:
+        dT = np.subtract(timestamps[1:n], timestamps[0:n-1])
+        dTs = 1 / (dT.seconds + dT.microseconds*(1e-06))
+        return (np.percentile(dTs, 25), np.percentile(dTs, 50), np.percentile(dTs, 75), np.mean(dTs))
 
 
 
