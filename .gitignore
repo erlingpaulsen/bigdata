@@ -3,7 +3,7 @@ old/*
 data/unzipped/*
 data/zipped/*
 test/*
-
+test.py
 
 ### Python ###
 # Byte-compiled / optimized / DLL files

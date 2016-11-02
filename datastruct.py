@@ -13,8 +13,9 @@ import matplotlib.dates as pltd
 import pickle
 
 
-tag_map = {'Start':'.01', 'Stop':'.02', 'OutRunning':'.03', 'Meas1':'', 'B4':'', 'Out':'', 'ProMeas':'', 'OutMeas':'', 'OutPosition':'.01'}
-sl = fh.loadDataH5('../data/', 'signal_list.h5') 
+tag_map = {'Start':'.01', 'Stop':'.02', 'OutRunning':'.03', 'Meas1':'', 'B4':'',
+           'Out':'', 'ProMeas':'', 'OutMeas':'', 'OutPosition':'.01'}
+sl = fh.loadDataH5('data/', 'signal_list.h5') 
 
 class Variable:
     """
@@ -23,13 +24,13 @@ class Variable:
     
     def __init__(self, col):
         self.values = col.values[~np.isnan(col.values)]
-        self.timestamps = pltd.date2num(col.index[~np.isnan(col.values)].values)
+        self.timestamps = col.index[~np.isnan(col.values)]
  
         (tagno, name, system) = getVarNames(col)
         self.tagno = str(tagno)        
         self.name = str(name)
         self.system = str(system)
-        self.frequencies = getFrequencies(self.values, self.timestamps)
+        self.frequencies = getFrequencies(self.timestamps)
     
 
 class Data:
@@ -46,6 +47,7 @@ class Data:
     def load(filename):
         with file(filename, 'rb') as f:
             return pickle.load(f)
+       
             
 
 def getVarNames(col):
@@ -64,8 +66,14 @@ def getVarNames(col):
     return (tagno, name, system)
 
 
-def getFrequencies(values, timestamps):
+def getFrequencies(timestamps):
     return 0
 
-
+def toTable(struct):
+    keys = struct.variables.keys()
+    nkeys = len(keys)
+    dfs = []
+    for i in np.arange(0,nkeys):
+        dfs.append(pd.DataFrame(data={keys[i]:struct.variables[keys[i]]}, index=struct.variables[keys[i]].timestamps))
+    return pd.concat(dfs,axis=1)
 
