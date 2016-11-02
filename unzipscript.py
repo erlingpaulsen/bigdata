@@ -19,8 +19,8 @@ ext = 'zip'
 files = fh.filesInDir(zip_path, ext)
 print str(len(files))+' files to unzip.'
 
-# Unzipping the files and timing the process
-#start = timeit.default_timer()
-#fh.unzipFiles(files, zip_path, unzip_path)
-#stop = timeit.default_timer()
-#print ('Time used unzipping ' +str(n)+' file(s): '+ str(stop - start))+' seconds'
+#Unzipping the files and timing the process
+start = timeit.default_timer()
+fh.unzipFiles(files, zip_path, unzip_path)
+stop = timeit.default_timer()
+print ('Time used unzipping ' +str(len(files))+' file(s): '+ str(stop - start))+' seconds'
