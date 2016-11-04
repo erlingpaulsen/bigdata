@@ -70,6 +70,12 @@ def unzipFiles(files, filedir, unzipdir):
         zip_ref.close()
     print "Done unzipping\n"
 
+def deleteFile(f, filedir):
+    try:
+        os.remove(filedir+f)
+    except OSError:
+        print 'Could not delete '+filedir+f
+
 def loadDataCSV(directory, filename, rows=-1):
     """
     loadDataCSV(directory, filename, rows=-1) loads data from a csv file into a 
