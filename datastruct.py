@@ -172,8 +172,11 @@ def concatStructs(structs):
         struct = structs[idx+1]
         for key in struct.variables.keys():
             out.variables[key].values = np.append(out.variables[key].values, struct.variables[key].values)
-            if not out.variables[key].timestamps == []:
-                out.variables[key].timestamps = out.variables[key].timestamps.append(struct.variables[key].timestamps)    
+            if len(out.variables[key].timestamps) == 0:
+                out.variables[key].timestamps = np.append(out.variables[key].timestamps, struct.variables[key].timestamps)
+                out.variables[key].timestamps = pd.DatetimeIndex(out.variables[key].timestamps)
+            else:
+                out.variables[key].timestamps = out.variables[key].timestamps.append(struct.variables[key].timestamps)
             out.variables[key].frequencies = np.append(out.variables[key].frequencies, struct.variables[key].frequencies)
     return out
     

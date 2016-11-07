@@ -1,11 +1,6 @@
 ### Folders ###
 old/*
-data/unzipped/*
-data/zipped/*
-data/struct/*
-data/struct_rounded/*
-data/struct_freq_only/*
-test/*
+data/*
 test.py
 
 ### Python ###

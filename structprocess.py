@@ -21,17 +21,22 @@ n = len(files)
 print 'Number of files: '+str(n)
 
 
-starttime = timeit.default_timer()
-for i,f in enumerate(files):
-    if i % 10 == 0:
-        print 'File '+str(i)+'. Total seconds used: '+str(int(timeit.default_timer()-starttime))
-        structs.append(ds.Data.load(freq_path+f))
 
-struct_freq = ds.concatStructs(structs)
-struct_freq.save(freq_path+'freq_every_10th_file.txt')
-df_freq = ds.toTable(struct_freq, case=2)
+#starttime = timeit.default_timer()
+#struct = ds.Data.load(freq_path+'freq_every_20th_file.txt')
+#
+#dfs = []
+#for k in struct.variables.keys():
+#    p10 = np.percentile(struct.variables[k].frequencies, 10)  
+#    p25 = np.percentile(struct.variables[k].frequencies, 25) 
+#    p50 = np.percentile(struct.variables[k].frequencies, 50) 
+#    p75 = np.percentile(struct.variables[k].frequencies, 75) 
+#    p90 = np.percentile(struct.variables[k].frequencies, 90) 
+#    mean = np.mean(struct.variables[k].frequencies)
+#    dfs.append(pd.DataFrame(data={k:[p10, p25, p50, p75, p90, mean]}))
+#df_freq = pd.concat(dfs, axis=1)
 #stoptime = timeit.default_timer()
-#print 'Used '+ str(int(stoptime-starttime))+' seconds in total to round timestamps and average duplicates.'
+#print 'Used '+ str(int(stoptime-starttime))+' seconds in total to convert to table.'
 #def constructFreqDf():
 #    init = True
 #    for i,f in enumerate(files):
