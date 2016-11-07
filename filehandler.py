@@ -120,19 +120,22 @@ def saveSeries(series, filename):
         filename: filename of the .txt file, do not include file format (.txt)
     """
     
-    #converting col from series to array and iterate through it
-    #used for debugging mainly
-    with open(filename + ".txt", "w") as text_file:
+    # Iterating through the series and writing index,value
+    with open(filename + '.txt', 'w') as text_file:
         for i in series.index:  
             text_file.write("%s,%s\n" % (i,series[i]))
-
-###################################
-#           Example               #
-###################################
-#
-#path = "../data/zipped/"
-#ex = "*.zip"
-#unzipdir = "../data/unzipped/"
-#printFilesInDir(path, ex)
-#files = filesInDir(path, ex)
-#unzipFiles(files, path, unzipdir)
+            
+def saveColumn(col, filename):
+    """
+    Saves a column (array) as a txt file.
+    
+    Input:
+        col: Column you want to save
+        filename: Filename of the .txt file, do not include file format (.txt)
+    """
+    
+    # Iterating through the column and writing value
+    with open(filename + '.txt', 'w') as text_file:
+        for v in col:
+    
+            text_file.write("%s\n" % v)

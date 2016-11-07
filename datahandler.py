@@ -3,6 +3,9 @@
 Created on Wed Oct 12 11:34:07 2016
 
 @author: ERLING
+
+This file contains some relevant methods for working with and manipulating the
+Pandas DataFrames.
 """
 from __future__ import division
 import pandas as pd

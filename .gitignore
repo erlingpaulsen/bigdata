@@ -2,9 +2,9 @@
 old/*
 data/unzipped/*
 data/zipped/*
-data/zipped2/*
-data/frequency/*
 data/struct/*
+data/struct_rounded/*
+data/struct_freq_only/*
 test/*
 test.py
 
