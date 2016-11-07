@@ -21,7 +21,6 @@ n = len(files)
 print 'Number of files: '+str(n)
 
 
-structs = []
 starttime = timeit.default_timer()
 for i,f in enumerate(files):
     if i % 10 == 0:
