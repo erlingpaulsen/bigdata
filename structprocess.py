@@ -16,11 +16,32 @@ rounded_path = 'data/struct_rounded/'
 freq_path = 'data/struct_freq_only/'
 ex = 'txt'
 
-files = fh.filesInDir(freq_path,ex)
+tag = 'RG012C/Meas1/PRIM'
+
+files = fh.filesInDir(rounded_path,ex)
 n = len(files)
 print 'Number of files: '+str(n)
 
 
+#f1 = files[0]
+#f2 = files[1]
+#f3 = files[2]
+#f4 = files[3]
+#
+#struct1 = ds.Data.load(rounded_path+f1)
+#struct2 = ds.Data.load(rounded_path+f2)
+#struct3 = ds.Data.load(rounded_path+f3)
+#struct4 = ds.Data.load(rounded_path+f4)
+#fh.saveColumn(struct1.variables[tag].timestamps, "struct1ts")
+#fh.saveColumn(struct2.variables[tag].timestamps, "struct2ts")
+#fh.saveColumn(struct3.variables[tag].timestamps, "struct3ts")
+#fh.saveColumn(struct4.variables[tag].timestamps, "struct4ts")
+#
+#
+#struct5 = ds.concatStructs([struct1, struct2, struct3, struct4])
+#fh.saveColumn(struct5.variables[tag].timestamps, "struct5ts")
+
+#plt.plot(struct5.variables[tag].timestamps, np.arange(len(struct5.variables[tag].timestamps)))
 
 #starttime = timeit.default_timer()
 #struct = ds.Data.load(freq_path+'freq_every_20th_file.txt')

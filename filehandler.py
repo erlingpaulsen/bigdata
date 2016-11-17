@@ -75,6 +75,17 @@ def deleteFile(f, filedir):
         os.remove(filedir+f)
     except OSError:
         print 'Could not delete '+filedir+f
+        
+def rename(directory, extension='txt'):
+    files = filesInDir(directory, extension)
+    for f in files:
+        splitted = f.split('2015T')
+        if f.split('2015T')[1][0] == '4':
+            newname = splitted[0] + '2015T0' + splitted[1] + '2015T' + splitted[2]
+            os.rename(directory + f, directory + newname)
+        if f.split('2015T')[2][0] == '4':
+            newname = splitted[0] + '2015T' + splitted[1] + '2015T0' + splitted[2]
+            os.rename(directory + f, directory + newname)
 
 def loadDataCSV(directory, filename, rows=-1):
     """
