@@ -12,7 +12,7 @@ Created on Mon Nov 07 12:33:07 2016
 # To import files from another folder
 import sys
 sys.path.append('../')
-#import filehandler as fh
+import filehandler as fh
 #import datahandler as dh
 import datastruct as ds
 from datastruct import Data
@@ -48,6 +48,13 @@ ex = 'txt'
 
 # Saving struct
 struct_full = Data.load('../data/FULL_PERIOD_ROUNDED.txt')
-df_full = ds.toTable(struct_full)
+grp1_l = fh.loadColumn('../frequency/group1_log')
+grp2_l = fh.loadColumn('../frequency/group2_log')
+grp3_l = fh.loadColumn('../frequency/group3_log')
+grp4_l = fh.loadColumn('../frequency/group4_log')
+struct_grp4_l = ds.deleteVariables(struct_full, grp1_l+grp2_l+grp3_l)
+struct_grp4_l.save('../data/FULL_PERIOD_ROUNDED_GRP4_LOG.txt')
+
+#df_full = ds.toTable(struct_full)
 
 #struct_full = Data.load('FULL_PERIOD_ROUNDED.txt')

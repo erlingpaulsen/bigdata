@@ -150,3 +150,12 @@ def saveColumn(col, filename):
         for v in col:
     
             text_file.write("%s\n" % v)
+
+def loadSeries(filename):
+    series = pd.read_csv(filename+'.txt', sep=',', header=None, names=['Index', 'Value'])
+    
+def loadColumn(filename):
+    col = []
+    with open(filename+'.txt', 'r') as text_file:
+        col = text_file.read().splitlines()
+    return col
