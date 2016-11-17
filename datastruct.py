@@ -18,7 +18,7 @@ import pickle
 
 tag_map = {'Start':'.01', 'Stop':'.02', 'OutRunning':'.03', 'Meas1':'', 'B4':'',
            'Out':'', 'ProMeas':'', 'OutMeas':'', 'OutPosition':'.01'}
-sl = fh.loadDataH5('D:/Erling/NTNU/Prosjektoppgave/bigdata/data/', 'signal_list.h5') 
+sl = fh.loadDataH5('data/', 'signal_list.h5') 
 
 class Variable:
     """
