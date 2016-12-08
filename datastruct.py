@@ -15,10 +15,11 @@ import datahandler as dh
 import datetime
 import pickle
 
+root = 'D:/Erling/NTNU/Prosjektoppgave/bigdata/'
 
 tag_map = {'Start':'.01', 'Stop':'.02', 'OutRunning':'.03', 'Meas1':'', 'B4':'',
            'Out':'', 'ProMeas':'', 'OutMeas':'', 'OutPosition':'.01'}
-sl = fh.loadDataH5('data/', 'signal_list.h5') 
+sl = fh.loadDataH5(root+'data/', 'signal_list.h5') 
 
 class Variable:
     """
@@ -184,7 +185,7 @@ def concatStructs(structs):
     return out
     
 
-def roundTimestamps(struct):
+def roundTimestamps(struct, to):
     """
     roundTimestamps(struct) takes a struct and rounds all the timestamps to the
     nearest seconds (without removing duplicate timestamps).
@@ -195,9 +196,14 @@ def roundTimestamps(struct):
     Output:
         - struct: Same struct with timestamps rounded
     """
-    keys = struct.variables.keys()
-    for key in keys:
-        struct.variables[key].timestamps = pd.DatetimeIndex([(x + datetime.timedelta(microseconds=5e5)).replace(microsecond=0) for x in struct.variables[key].timestamps])
+    if to == 'second':
+        keys = struct.variables.keys()
+        for key in keys:
+            struct.variables[key].timestamps = pd.DatetimeIndex([(x + datetime.timedelta(microseconds=5e5)).replace(microsecond=0) for x in struct.variables[key].timestamps])
+    elif to == 'minute':
+        keys = struct.variables.keys()
+        for key in keys:
+            struct.variables[key].timestamps = pd.DatetimeIndex([(x + datetime.timedelta(seconds=30)).replace(second=0) for x in struct.variables[key].timestamps])
     return struct
 
 
@@ -264,8 +270,14 @@ def deleteVariables(struct, varlist):
         - struct: The struct with the variables removes (if possible)
     """
     for k in struct.variables.keys():
-        for v in varlist:
-            if k==v:
-                del struct.variables[v]
+        if k in varlist:
+            del struct.variables[k]
+    
+    return struct
+    
+def keepVariables(struct, varlist):
+    for k in struct.variables.keys():
+        if k not in varlist:
+            del struct.variables[k]
     
     return struct
